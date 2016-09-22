@@ -1,2 +1,2 @@
 # file_manager
-Simple file manager writed on QT creator for Ubuntu.
+Simple file manager writed on QTCreator for Ubuntu.
