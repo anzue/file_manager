@@ -15,15 +15,16 @@ public:
             QFileSystemModel*,
             QTreeView*,
             QListView*,
+            QLineEdit*,
             QPoint,
             QSize,
             QString path = "/");
     QFileSystemModel* getList();
     QFileSystemModel* getTree();
-/*
-    QTreeView* getTreeView();
-    QListView* getListView();
-*/
+
+    QString getPath();
+
+    void setPath(QString);
 
     void recalculateSize();
     void setSize(QSize);
@@ -48,8 +49,11 @@ protected:
     QTreeView* treeView;
     QListView* listView;
 
+    QLineEdit* adress;
+
     QSize size;
     QPoint position;
+    QString path;
     int treeHiden;
 };
 

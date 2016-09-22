@@ -15,10 +15,10 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="5">
+    <item row="1" column="4">
      <widget class="QListView" name="right_list_view"/>
     </item>
-    <item row="0" column="3">
+    <item row="1" column="2">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -31,14 +31,20 @@
       </property>
      </spacer>
     </item>
-    <item row="0" column="2">
+    <item row="1" column="1">
      <widget class="QListView" name="left_list_view"/>
     </item>
-    <item row="0" column="0">
+    <item row="1" column="3">
+     <widget class="QTreeView" name="right_tree_view"/>
+    </item>
+    <item row="1" column="0">
      <widget class="QTreeView" name="left_tree_view"/>
     </item>
-    <item row="0" column="4">
-     <widget class="QTreeView" name="right_tree_view"/>
+    <item row="0" column="3" colspan="2">
+     <widget class="QLineEdit" name="rightAdress"/>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLineEdit" name="leftAdress"/>
     </item>
    </layout>
    <zorder>left_list_view</zorder>
@@ -46,6 +52,8 @@
    <zorder>left_tree_view</zorder>
    <zorder>right_tree_view</zorder>
    <zorder>verticalSpacer</zorder>
+   <zorder>leftAdress</zorder>
+   <zorder>rightAdress</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -84,13 +92,14 @@
      <string>About</string>
     </property>
     <addaction name="actionAbout_program"/>
+    <addaction name="actionHelp"/>
    </widget>
    <addaction name="menuView"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
+    <enum>LeftToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
@@ -135,6 +144,11 @@
   <action name="actionShow_both">
    <property name="text">
     <string>Show both</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
  </widget>

@@ -13,15 +13,18 @@ Panel::Panel(
         QFileSystemModel* newList,
         QTreeView* newTreeView,
         QListView* newListView,
+        QLineEdit* newLineEdit,
         QPoint newPosition,
         QSize newSize,
-        QString path
+        QString newPath
         )
 {
+    adress = newLineEdit;
+    setPath(newPath);
     tree = newTree;
     list = newList;
-    tree->setRootPath(path);
-    list->setRootPath(path);
+    tree->setRootPath(newPath);
+    list->setRootPath(newPath);
     tree->setFilter(QDir::AllDirs | QDir::NoDotAndDotDot);
     treeView = newTreeView;
     listView = newListView;
@@ -33,12 +36,10 @@ Panel::Panel(
     size = newSize;
     treeHiden = 0;
 
-
     treeView->setColumnHidden(0,0);
     treeView->setColumnHidden(1,1);
     treeView->setColumnHidden(2,1);
     treeView->setColumnHidden(3,1);
-
 
     treeView->setColumnWidth(0,size.width()*(percentsForTree-2)/100);
 
@@ -66,7 +67,12 @@ void Panel::openFolder(QFileInfo file){
         return;
 
     listView->setRootIndex(list->setRootPath(file.absoluteFilePath()));
+    setPath(file.absoluteFilePath());
+}
 
+void Panel::setPath(QString newPath){
+    path = newPath;
+    adress->setText(path);
 }
 
 void Panel::openFile(QFileInfo file){
@@ -119,4 +125,8 @@ void Panel::showTree(){
 
 int Panel::isTreeHiden(){
     return treeHiden;
+}
+
+QString Panel::getPath(){
+    return path;
 }

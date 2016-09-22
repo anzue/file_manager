@@ -1,4 +1,5 @@
 #include <QTextStream>
+#include <QDesktopServices>
 
 #include "texteditor.h"
 #include "ui_texteditor.h"
@@ -66,8 +67,8 @@ int TextEditor::openFile(QFileInfo file){
                 file.completeSuffix())
             == supported_suffixes.end())
     {
-        showInfo("This type of files is not supported\n");
-
+        //showInfo("This type of files is not supported\n");
+        QDesktopServices::openUrl(QUrl(file.absoluteFilePath()));
         close();
         return 3;
     }

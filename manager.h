@@ -13,8 +13,6 @@
 
 #include "panel.h"
 
-
-
 namespace Ui {
 class Manager;
 }
@@ -39,12 +37,6 @@ private slots:
     void on_left_list_view_doubleClicked(const QModelIndex &index);
 
     void on_right_list_view_doubleClicked(const QModelIndex &index);
-
-    //void on_actionShow_trees_triggered();
-
-   // void on_Manager_iconSizeChanged(const QSize &iconSize);
-
-    //void on_actionHide_trees_triggered();
 
     void on_actionAbout_program_triggered();
 

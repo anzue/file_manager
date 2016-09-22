@@ -30,6 +30,7 @@ Manager::Manager(QWidget *parent) :
                 new QFileSystemModel(this),
                 ui->left_tree_view,
                 ui->left_list_view,
+                ui->leftAdress,
                 left_pos,
                 default_panel_size,
                 path);
@@ -39,6 +40,7 @@ Manager::Manager(QWidget *parent) :
                 new QFileSystemModel(this),
                 ui->right_tree_view,
                 ui->right_list_view,
+                ui->rightAdress,
                 right_pos,
                 default_panel_size,
                 path);
@@ -84,7 +86,7 @@ void Manager::on_right_list_view_doubleClicked(const QModelIndex &index)
 
 void Manager::on_actionAbout_program_triggered()
 {
-    showInfo("there will be info");
+    showInfo("File manager 1.0\nAutor - Zuev Anton\nYear 2016\n","About program");
 }
 
 void Manager::on_actionHide_left_tree_triggered()
