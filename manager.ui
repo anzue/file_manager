@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
-    <height>438</height>
+    <width>1025</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,10 +15,126 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="4">
+    <item row="1" column="0" colspan="2">
+     <widget class="QGroupBox" name="groupBoxLeft">
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="4">
+        <widget class="QPushButton" name="renameLeft">
+         <property name="text">
+          <string>Rename</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="copyLeft">
+         <property name="text">
+          <string>Copy</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="deleteLeft">
+         <property name="text">
+          <string>Del</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="moveLeft">
+         <property name="text">
+          <string>Move</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="editLeft">
+         <property name="text">
+          <string>Edit</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="newFileLeft">
+         <property name="text">
+          <string>New File</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="newFolderLeft">
+         <property name="text">
+          <string>New Folder</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="3" colspan="2">
+     <widget class="QGroupBox" name="groupBoxRight">
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="copyRight">
+         <property name="text">
+          <string>Copy</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="moveRight">
+         <property name="text">
+          <string>Move</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="deleteRight">
+         <property name="text">
+          <string>Del</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="editRight">
+         <property name="text">
+          <string>Edit</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QPushButton" name="renameRight">
+         <property name="text">
+          <string>Rename</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="newFileLeft_2">
+         <property name="text">
+          <string>New File</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="newFolderLeft_2">
+         <property name="text">
+          <string>New Folder</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="4">
      <widget class="QListView" name="right_list_view"/>
     </item>
-    <item row="1" column="2">
+    <item row="2" column="2">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -31,13 +147,10 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="1">
-     <widget class="QListView" name="left_list_view"/>
-    </item>
-    <item row="1" column="3">
+    <item row="2" column="3">
      <widget class="QTreeView" name="right_tree_view"/>
     </item>
-    <item row="1" column="0">
+    <item row="2" column="0">
      <widget class="QTreeView" name="left_tree_view"/>
     </item>
     <item row="0" column="3" colspan="2">
@@ -45,6 +158,9 @@
     </item>
     <item row="0" column="0" colspan="2">
      <widget class="QLineEdit" name="leftAdress"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QListView" name="left_list_view"/>
     </item>
    </layout>
    <zorder>left_list_view</zorder>
@@ -54,23 +170,25 @@
    <zorder>verticalSpacer</zorder>
    <zorder>leftAdress</zorder>
    <zorder>rightAdress</zorder>
+   <zorder>groupBoxLeft</zorder>
+   <zorder>groupBoxRight</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>659</width>
+     <width>1025</width>
      <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuView">
     <property name="title">
-     <string>View</string>
+     <string>Вигляд</string>
     </property>
     <widget class="QMenu" name="menuHide_trees">
      <property name="title">
-      <string>Hide trees</string>
+      <string>Сховати дерева</string>
      </property>
      <addaction name="actionHide_both"/>
      <addaction name="actionHide_left_tree"/>
@@ -78,7 +196,7 @@
     </widget>
     <widget class="QMenu" name="menuShow_trees">
      <property name="title">
-      <string>Show trees</string>
+      <string>Показати дерева</string>
      </property>
      <addaction name="actionShow_both"/>
      <addaction name="actionShow_left_tree"/>
@@ -89,13 +207,20 @@
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>About</string>
+     <string>Про програму</string>
     </property>
     <addaction name="actionAbout_program"/>
     <addaction name="actionHelp"/>
    </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="actionCopy"/>
+   </widget>
    <addaction name="menuView"/>
    <addaction name="menuAbout"/>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -118,37 +243,42 @@
   </action>
   <action name="actionHide_left_tree">
    <property name="text">
-    <string>Hide left tree</string>
+    <string>Сховати ліве</string>
    </property>
   </action>
   <action name="actionHide_right_tree">
    <property name="text">
-    <string>Hide right tree</string>
+    <string>Сховати праве</string>
    </property>
   </action>
   <action name="actionShow_left_tree">
    <property name="text">
-    <string>Show left tree</string>
+    <string>Показати ліве</string>
    </property>
   </action>
   <action name="actionShow_right_tree">
    <property name="text">
-    <string>Show right tree</string>
+    <string>Показати праве</string>
    </property>
   </action>
   <action name="actionHide_both">
    <property name="text">
-    <string>Hide both</string>
+    <string>Сховати обидва</string>
    </property>
   </action>
   <action name="actionShow_both">
    <property name="text">
-    <string>Show both</string>
+    <string>Показати обидва</string>
    </property>
   </action>
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Скопіювати</string>
    </property>
   </action>
  </widget>

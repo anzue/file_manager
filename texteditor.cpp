@@ -47,8 +47,6 @@ int TextEditor::openFile(QFileInfo file){
     if(!file.isFile())
         return 1;
 
-    //cout<<"File opened for reading\n";
-
     if(!file.isReadable()){
         showInfo("Error reading file");
         close();
@@ -162,3 +160,20 @@ void TextEditor::on_saveText_clicked()
     save();
 }
 
+
+void TextEditor::on_lineEdit_textEdited(const QString &newText)
+{
+
+}
+
+void TextEditor::on_lineEdit_textChanged(const QString &text)
+{
+
+}
+
+void TextEditor::on_lineEdit_editingFinished()
+{
+    ui->lineEdit->setDisabled(1);
+    ui->lineEdit->setEnabled(1);
+    ui->textEdit->find(ui->lineEdit->text());
+}

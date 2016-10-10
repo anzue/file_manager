@@ -16,13 +16,16 @@ SOURCES += main.cpp\
         manager.cpp \
     panel.cpp \
     texteditor.cpp \
-    infopanel.cpp
+    infopanel.cpp \
+    entername.cpp
 
 HEADERS  += manager.h \
     panel.h \
     texteditor.h \
-    infopanel.h
+    infopanel.h \
+    entername.h
 
 FORMS    += manager.ui \
     texteditor.ui \
-    infopanel.ui
+    infopanel.ui \
+    entername.ui

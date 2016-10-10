@@ -35,6 +35,12 @@ private slots:
     void save();
     //void on_saveButton_changed();
 
+    void on_lineEdit_textEdited(const QString &arg1);
+
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_lineEdit_editingFinished();
+
 private:
     Ui::TextEditor *ui;
     QFileInfo file;

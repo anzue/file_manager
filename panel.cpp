@@ -2,6 +2,8 @@
 
 #include "texteditor.h"
 
+#include<iostream>
+using std::cout;
 
 Panel::Panel()
 {
@@ -20,7 +22,7 @@ Panel::Panel(
         )
 {
     adress = newLineEdit;
-    setPath(newPath);
+
     tree = newTree;
     list = newList;
     tree->setRootPath(newPath);
@@ -42,7 +44,7 @@ Panel::Panel(
     treeView->setColumnHidden(3,1);
 
     treeView->setColumnWidth(0,size.width()*(percentsForTree-2)/100);
-
+    setPath(newPath);
     recalculateSize();
 }
 
@@ -66,13 +68,18 @@ void Panel::openFolder(QFileInfo file){
     if(!file.isDir())
         return;
 
-    listView->setRootIndex(list->setRootPath(file.absoluteFilePath()));
     setPath(file.absoluteFilePath());
 }
 
 void Panel::setPath(QString newPath){
+    QFileInfo file(newPath);
+    if(!file.exists() || !file.isDir())
+        return;
+
+    listView->setRootIndex(list->setRootPath(file.absoluteFilePath()));
     path = newPath;
     adress->setText(path);
+
 }
 
 void Panel::openFile(QFileInfo file){
@@ -102,14 +109,9 @@ void Panel::setPosition(QPoint newPosition){
 void Panel::recalculateSize(){
     if(treeHiden){
         treeView->hide();
-        listView->resize(size);
-        listView->move(position);
     }
     else{
         treeView->show();
-        treeView->resize(size.rwidth()*percentsForTree/100,size.rheight());
-        listView->resize(size.rwidth()*(100-percentsForTree)/100,size.rheight());
-        listView->move(position.rx()+treeView->size().rwidth(),position.ry());
     }
 }
 
@@ -129,4 +131,98 @@ int Panel::isTreeHiden(){
 
 QString Panel::getPath(){
     return path;
+}
+
+void Panel::setOther(Panel * q){
+    other = q;
+}
+
+void Panel::copyFile(QFileInfo fileInfo){
+
+    if(fileInfo == QFileInfo())
+        fileInfo = getSelectedFile();
+
+    QString filename =
+            fileInfo.absoluteFilePath();
+
+    QFile file(filename);
+
+    file.open(QIODevice::ReadOnly);
+
+    if(file.exists() && file.isOpen() && file.isReadable() && 1){
+        QString
+                newFilename =
+                    other->getPath() + "/" +
+                    QFileInfo(file.fileName()).fileName();
+
+        file.copy(newFilename);
+    }
+    file.close();
+}
+
+void Panel::deleteFile(QFileInfo fileInfo){
+
+
+    if(fileInfo.isDir()){
+        QDir dir(fileInfo.absoluteFilePath());
+        for ( QFileInfo file:dir.entryInfoList() ){
+            deleteFile(file);
+        }
+        dir.rmdir(dir.absolutePath());
+
+        return;
+    }
+
+    QString filename = fileInfo.absoluteFilePath();
+
+    QFile file(filename);
+
+    file.open(QIODevice::ReadOnly);
+
+    file.remove();
+
+    file.close();
+}
+
+void Panel::renameFile(QFileInfo fileInfo,QString newName){
+
+
+    QString filename = fileInfo.absoluteFilePath();
+
+    QFile file(filename);
+
+    file.open(QIODevice::ReadWrite);
+
+    file.rename(newName);
+
+    file.close();
+}
+
+void Panel::newFolder(QString name){
+    QDir dir(path);
+    dir.mkdir(name);
+}
+
+void Panel::newFile(QString name){
+    //QDir dir(path);
+    QFile file(path+"/"+name);
+    file.open(QIODevice::WriteOnly);
+    file.close();
+}
+
+
+void Panel::rename(QString newName){
+    if(newName.length()<=0)
+        return;
+    QFileInfo file = getSelectedFile();
+    QDir dir(file.absoluteDir());
+    dir.rename(file.absoluteFilePath()
+               ,dir.absolutePath()+"/"+newName);
+}
+
+QFileInfo Panel::getSelectedFile(){
+    return
+            list->fileInfo(listView->selectionModel()->
+                           currentIndex());
+
 }

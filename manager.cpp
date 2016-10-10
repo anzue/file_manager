@@ -2,11 +2,7 @@
 
 #include "infopanel.h"
 
-//#include "ui_manager.h"
-
-//#include "texteditor.h"
-
-//#define WINDOWS
+#include "entername.h"
 
 QPoint left_pos(5,5),
         right_pos(500,5);
@@ -19,7 +15,7 @@ Manager::Manager(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QString path = "/";
+    QString path = "/home/anton/Стільниця/Test/";
 
 #ifdef WINDOWS
     path = "C:/";
@@ -45,6 +41,21 @@ Manager::Manager(QWidget *parent) :
                 default_panel_size,
                 path);
 
+    left->setOther(right);
+    right->setOther(left);
+
+    active = left;
+
+    left->setPath(path);
+    right->setPath(path);
+    //ui->renameLeft->hide();
+    //ui->renameRight->hide();
+    //ui->newFileLeft->hide();
+
+    confirm = new enterName(this);
+    confirm->hide();
+
+    connect(confirm, SIGNAL(sendData(QString)),this, SLOT(recieveData(QString)));
 }
 
 Manager::~Manager()
@@ -120,3 +131,121 @@ void Manager::on_actionShow_both_triggered()
     left->showTree();
     right->showTree();
 }
+
+void Manager::on_actionCopy_triggered()
+{
+    active->copyFile(active->getSelectedFile());
+}
+
+void Manager::on_right_tree_view_activated(const QModelIndex &index)
+{
+    active = right;
+}
+
+void Manager::on_right_list_view_activated(const QModelIndex &index)
+{
+    active = right;
+}
+
+void Manager::on_left_list_view_activated(const QModelIndex &index)
+{
+    active = left;
+}
+
+void Manager::on_left_tree_view_activated(const QModelIndex &index)
+{
+    active = left;
+}
+
+void Manager::on_copyLeft_clicked()
+{
+    left->copyFile(left->getSelectedFile());
+}
+
+void Manager::on_renameRight_clicked()
+{
+
+}
+
+void Manager::on_moveLeft_clicked()
+{
+    left->copyFile(left->getSelectedFile());
+    left->deleteFile(left->getSelectedFile());
+}
+
+void Manager::on_deleteLeft_clicked()
+{
+    left->deleteFile(left->getSelectedFile());
+}
+
+void Manager::on_editLeft_clicked()
+{
+    left->openFile(left->getSelectedFile());
+}
+
+void Manager::on_renameLeft_clicked()
+{
+    active = left;
+    mode = _RENAME;
+    hide();
+    confirm->show();
+}
+
+void Manager::on_copyRight_clicked()
+{
+    right->copyFile(right->getSelectedFile());
+}
+
+void Manager::on_moveRight_clicked()
+{
+    right->copyFile(right->getSelectedFile());
+    right->deleteFile(right->getSelectedFile());
+}
+
+void Manager::on_deleteRight_clicked()
+{
+    right->deleteFile(right->getSelectedFile());
+}
+
+void Manager::on_editRight_clicked()
+{
+    right->openFile(right->getSelectedFile());
+}
+
+void Manager::on_newFolderLeft_clicked()
+{
+    mode = _FOLDER;
+    hide();
+    confirm->show();
+}
+
+void Manager::on_newFileLeft_clicked()
+{
+    mode = _FILE;
+    hide();
+    confirm->show();
+}
+
+void Manager::on_leftAdress_editingFinished()
+{
+    left->setPath(ui->leftAdress->text());
+}
+
+void Manager::recieveData(QString str){
+
+    confirm->hide();
+    show();
+
+    if(str.length() == 0)
+        return;
+
+    if(mode == _RENAME)
+        active->rename(str);
+    else
+        if(mode == _FOLDER)
+            active->newFolder(str);
+        else
+            active->newFile(str);
+}
+
+
