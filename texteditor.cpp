@@ -9,6 +9,8 @@
 //#include <iostream>
 //using std::cout;
 
+#include <QShortcut>
+
 using namespace std;
 
 TextEditor::TextEditor(QWidget *parent) :
@@ -16,6 +18,9 @@ TextEditor::TextEditor(QWidget *parent) :
     ui(new Ui::TextEditor)
 {
     ui->setupUi(this);
+
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(save()));
+
 }
 
 TextEditor::~TextEditor()

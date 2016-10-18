@@ -80,6 +80,13 @@ private slots:
 
 
     void on_newFileLeft_clicked();
+    void on_newFolderRight_clicked();
+    void on_newFileRight_clicked();
+    void on_backLeft_clicked();
+    void on_backRight_clicked();
+    void on_actionHelp_triggered();
+
+    void Move();
 
 private:
     Ui::Manager *ui;

@@ -4,6 +4,8 @@
 
 #include "entername.h"
 
+#include <QShortcut>
+
 QPoint left_pos(5,5),
         right_pos(500,5);
 
@@ -56,6 +58,17 @@ Manager::Manager(QWidget *parent) :
     confirm->hide();
 
     connect(confirm, SIGNAL(sendData(QString)),this, SLOT(recieveData(QString)));
+
+    //new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_H), this, SLOT(hide()));
+    //new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(show()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_H), this, SLOT( on_actionHide_both_triggered() ));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT( on_actionShow_both_triggered() ));
+
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_H), this, SLOT( on_actionHide_both_triggered() ));
+    new QShortcut(QKeySequence(Qt::Key_F1), this ,SLOT( on_actionHelp_triggered() ));
+    new QShortcut(QKeySequence(Qt::Key_F2), this ,SLOT( on_actionAbout_program_triggered() ));
+
+    new QShortcut(QKeySequence(Qt::Key_F6) ,this ,SLOT(Move()));
 }
 
 Manager::~Manager()
@@ -164,7 +177,10 @@ void Manager::on_copyLeft_clicked()
 
 void Manager::on_renameRight_clicked()
 {
-
+    active = right;
+    mode = _RENAME;
+    hide();
+    confirm->show();
 }
 
 void Manager::on_moveLeft_clicked()
@@ -249,3 +265,42 @@ void Manager::recieveData(QString str){
 }
 
 
+
+void Manager::on_newFolderRight_clicked()
+{
+    mode = _FOLDER;
+    hide();
+    confirm->show();
+}
+
+void Manager::on_newFileRight_clicked()
+{
+    mode = _FILE;
+    hide();
+    confirm->show();
+}
+
+void Manager::on_backLeft_clicked()
+{
+    left->back();
+}
+
+void Manager::on_backRight_clicked()
+{
+    right->back();
+}
+
+void Manager::on_actionHelp_triggered()
+{
+
+}
+
+void Manager::Move(){
+
+
+
+    if(active == left)
+        on_moveLeft_clicked();
+    else
+        on_moveRight_clicked();
+}

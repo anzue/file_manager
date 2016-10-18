@@ -4,6 +4,8 @@
 #include "QFileSystemModel"
 #include "ui_manager.h"
 
+#include <vector>
+using std::vector;
 
 class Panel
 {
@@ -25,7 +27,7 @@ public:
 
     QString getPath();
 
-    void setPath(QString);
+    void setPath(QString,bool change=1);
 
     QFileInfo getSelectedFile();
 
@@ -53,6 +55,8 @@ public:
     void newFolder(QString name);
     void newFile(QString name);
 
+    void back();
+
     const static int percentsForTree = 50;
 
 protected:
@@ -70,6 +74,8 @@ protected:
     QPoint position;
     QString path;
     int treeHiden;
+    vector<QString> history;
+
 };
 
 #endif // PANEL_H

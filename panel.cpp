@@ -46,6 +46,8 @@ Panel::Panel(
     treeView->setColumnWidth(0,size.width()*(percentsForTree-2)/100);
     setPath(newPath);
     recalculateSize();
+
+    history.clear();
 }
 
 Panel::~Panel(){
@@ -71,10 +73,15 @@ void Panel::openFolder(QFileInfo file){
     setPath(file.absoluteFilePath());
 }
 
-void Panel::setPath(QString newPath){
+void Panel::setPath(QString newPath,bool change){
+
     QFileInfo file(newPath);
-    if(!file.exists() || !file.isDir())
+    if(!file.exists() || !file.isDir()){
+        adress->setText(path);
         return;
+    }
+    if(change && path!=newPath)
+        history.push_back(path);
 
     listView->setRootIndex(list->setRootPath(file.absoluteFilePath()));
     path = newPath;
@@ -149,7 +156,7 @@ void Panel::copyFile(QFileInfo fileInfo){
 
     file.open(QIODevice::ReadOnly);
 
-    if(file.exists() && file.isOpen() && file.isReadable() && 1){
+    if(file.exists() && file.isOpen() && file.isReadable()){
         QString
                 newFilename =
                     other->getPath() + "/" +
@@ -158,43 +165,22 @@ void Panel::copyFile(QFileInfo fileInfo){
         file.copy(newFilename);
     }
     file.close();
+
+
 }
 
 void Panel::deleteFile(QFileInfo fileInfo){
-
-
-    if(fileInfo.isDir()){
-        QDir dir(fileInfo.absoluteFilePath());
-        for ( QFileInfo file:dir.entryInfoList() ){
-            deleteFile(file);
-        }
-        dir.rmdir(dir.absolutePath());
-
-        return;
-    }
-
-    QString filename = fileInfo.absoluteFilePath();
-
-    QFile file(filename);
-
-    file.open(QIODevice::ReadOnly);
-
-    file.remove();
-
-    file.close();
+    if(fileInfo.isDir())
+        QDir(fileInfo.absoluteFilePath()).removeRecursively();
+    else
+        QFile(fileInfo.absoluteFilePath()).remove();
 }
 
 void Panel::renameFile(QFileInfo fileInfo,QString newName){
-
-
     QString filename = fileInfo.absoluteFilePath();
-
     QFile file(filename);
-
     file.open(QIODevice::ReadWrite);
-
     file.rename(newName);
-
     file.close();
 }
 
@@ -204,12 +190,10 @@ void Panel::newFolder(QString name){
 }
 
 void Panel::newFile(QString name){
-    //QDir dir(path);
     QFile file(path+"/"+name);
     file.open(QIODevice::WriteOnly);
     file.close();
 }
-
 
 void Panel::rename(QString newName){
     if(newName.length()<=0)
@@ -225,4 +209,13 @@ QFileInfo Panel::getSelectedFile(){
             list->fileInfo(listView->selectionModel()->
                            currentIndex());
 
+}
+
+void Panel::back(){
+
+    if(history.size()<=0)
+        return;
+
+    setPath(history[history.size()-1],0);
+    history.pop_back();
 }
