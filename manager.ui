@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1025</width>
+    <width>1037</width>
     <height>451</height>
    </rect>
   </property>
@@ -21,13 +21,6 @@
        <string/>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="4">
-        <widget class="QPushButton" name="renameLeft">
-         <property name="text">
-          <string>Rename</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0">
         <widget class="QPushButton" name="copyLeft">
          <property name="text">
@@ -49,13 +42,6 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="3">
-        <widget class="QPushButton" name="editLeft">
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="newFileLeft">
          <property name="text">
@@ -67,6 +53,27 @@
         <widget class="QPushButton" name="newFolderLeft">
          <property name="text">
           <string>New Folder</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QPushButton" name="renameLeft">
+         <property name="text">
+          <string>Rename</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="editLeft">
+         <property name="text">
+          <string>Edit</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="backLeft">
+         <property name="text">
+          <string>Back</string>
          </property>
         </widget>
        </item>
@@ -100,13 +107,6 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="3">
-        <widget class="QPushButton" name="editRight">
-         <property name="text">
-          <string>Edit</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="4">
         <widget class="QPushButton" name="renameRight">
          <property name="text">
@@ -115,16 +115,30 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="newFileLeft_2">
+        <widget class="QPushButton" name="newFileRight">
          <property name="text">
           <string>New File</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="newFolderLeft_2">
+        <widget class="QPushButton" name="newFolderRight">
          <property name="text">
           <string>New Folder</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="editRight">
+         <property name="text">
+          <string>Edit</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="backRight">
+         <property name="text">
+          <string>Back</string>
          </property>
         </widget>
        </item>
@@ -178,7 +192,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1025</width>
+     <width>1037</width>
      <height>25</height>
     </rect>
    </property>
@@ -238,7 +252,7 @@
   </action>
   <action name="actionAbout_program">
    <property name="text">
-    <string>About program</string>
+    <string>Про програму F2</string>
    </property>
   </action>
   <action name="actionHide_left_tree">
@@ -263,17 +277,17 @@
   </action>
   <action name="actionHide_both">
    <property name="text">
-    <string>Сховати обидва</string>
+    <string>Сховати обидва  Ctrl-H</string>
    </property>
   </action>
   <action name="actionShow_both">
    <property name="text">
-    <string>Показати обидва</string>
+    <string>Показати обидва Ctrl-S</string>
    </property>
   </action>
   <action name="actionHelp">
    <property name="text">
-    <string>Help</string>
+    <string>Допомога F1</string>
    </property>
   </action>
   <action name="actionCopy">
